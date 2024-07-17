@@ -6,7 +6,7 @@ export function Banner() {
     <div className="relative">
       <div>
         <img
-          className="w-full h-80 fixed"
+          className="w-full h-80 absolute"
           src={fundo}
           alt="Background de fundo"
         />
@@ -18,11 +18,6 @@ export function Banner() {
         <p className="text-zinc-50 font-medium py-5">
           Encontre em nossa estante o que precisa para seu desenvolvimento!
         </p>
-        {/* <input
-          className="bg-transparent border border-zinc-50 text-zinc-50 rounded-full w-[570px] px-40 py-4 outline-none"
-          type="text"
-          placeholder="Já sabe por onde começar?"
-        /> */}
         <div className="flex items-center justify-center border border-zinc-50 text-zinc-50 rounded-full w-[570px] px-36 py-4">
           <IoMdSearch size={24} />
           <input
