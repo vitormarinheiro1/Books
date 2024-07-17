@@ -1,6 +1,6 @@
 import { MdOutlineMail } from "react-icons/md";
 
-export function Novidades() {
+export function News() {
   return (
     <div className="py-14 flex justify-center items-center gap-16">
       <div className="flex flex-col">

@@ -1,9 +1,11 @@
+import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Banner } from "../../components/Menu";
+import { News } from "../../components/News";
 import { CriarConta } from "./criar-conta";
 import { Lancamentos } from "./lancamentos";
 import { MaisVendidos } from "./mais-vendidos";
-import { Novidades } from "./novidades";
+
 
 export function Home() {
   return (
@@ -13,7 +15,8 @@ export function Home() {
       <Lancamentos />
       <MaisVendidos />
       <CriarConta />
-      <Novidades />
+      <News />
+      <Footer />
     </>
   );
 }
