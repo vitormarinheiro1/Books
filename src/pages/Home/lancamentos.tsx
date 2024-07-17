@@ -8,7 +8,7 @@ import { FaRegHeart } from "react-icons/fa";
 export function Lancamentos() {
   return (
     <div>
-      <h1 className="flex justify-center text-2xl font-bold text-[#EB9B00] py-8">
+      <h1 className="flex justify-center text-2xl font-bold text-[#EB9B00] pt-10 pb-4">
         ÚLTIMOS LANÇAMENTOS
       </h1>
       <div className="bg-[#EBECEE] py-12 flex justify-center items-center gap-10">
