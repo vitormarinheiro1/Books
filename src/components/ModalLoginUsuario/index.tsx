@@ -4,10 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 
 interface Props {
-  closedModal: () => void;
+  aberta: boolean;
+  aoFechar: () => void
+  aoEfetuarLogin: () => void
 }
 
-export function ModalLoginUsuario({ closedModal }: Props) {
+export function ModalLoginUsuario({ aberta, aoFechar, aoEfetuarLogin }: Props) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -18,20 +20,25 @@ export function ModalLoginUsuario({ closedModal }: Props) {
       senha,
     };
 
-    axios
-      .post("http://localhost:8000/public/logar", usuario)
-      .then(() => {
-        alert("Usuário logado!");
-        setEmail("");
-        closedModal();
+    axios.post("http://localhost:8000/public/login", usuario)
+      .then(resposta => {
+        sessionStorage.setItem('token', resposta.data.access_token)
+        setEmail('')
+        setSenha('')
+        aoEfetuarLogin()
       })
-      .catch(() => {
-        alert("OPS! Alguma coisa deu errado!");
+      .catch((error) => {
+        if(error?.response?.data?.message)
+            alert(error.response.data.message)
+        else {
+            alert('Aconteceu um erro inesperado ao efetuar o seu login! Entre em contato com o suporte!')
+        }
       });
   };
 
+
   return (
-    <AbModal titulo="LOGIN" aberta={true} aoFechar={closedModal}>
+    <AbModal titulo="LOGIN" aberta={aberta} aoFechar={aoFechar}>
       <div className="flex items-center pt-8">
         <figure>
           <img
@@ -39,26 +46,24 @@ export function ModalLoginUsuario({ closedModal }: Props) {
             alt="Monitor com uma fechadura e uma pessoa com uma chave logo ao lado."
           />
         </figure>
-        <div className="flex flex-col">
-          <form onSubmit={aoSubmeterFormular} className="w-[500px] max-w-full">
-            <AbCampoTexto
-              value={email}
-              label="E-mail"
-              placeholder="email@gmail.com"
-              onChange={setEmail}
-            />
-            <AbCampoTexto
-              value={senha}
-              label="Senha"
-              placeholder="*********"
-              onChange={setSenha}
-              type="password"
-            />
-            <footer className="mt-12 text-center">
-              <AbBotao texto="Fazer Login" />
-            </footer>
-          </form>
-        </div>
+        <form onSubmit={aoSubmeterFormular} className="w-[500px] max-w-full">
+          <AbCampoTexto
+            value={email}
+            label="E-mail"
+            placeholder="email@gmail.com"
+            onChange={setEmail}
+          />
+          <AbCampoTexto
+            value={senha}
+            label="Senha"
+            placeholder="*********"
+            onChange={setSenha}
+            type="password"
+          />
+          <footer className="mt-12 text-center">
+            <AbBotao texto="Fazer Login" />
+          </footer>
+        </form>
       </div>
     </AbModal>
   );
