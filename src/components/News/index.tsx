@@ -12,7 +12,7 @@ export function News() {
           <br /> promoções e outros.
         </p>
       </div>
-      <button className="flex items-center gap-2 px-16 py-2 border border-gray-950 rounded-full">
+      <button className="flex items-center gap-2 px-16 py-2 border border-gray-950 rounded-full hover:bg-gray-200 ">
         <MdOutlineMail size={24} />
         Cadastre seu e-mail
       </button>
