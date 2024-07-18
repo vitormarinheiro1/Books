@@ -1,9 +1,10 @@
-import { AbBotao, AbCampoTexto, AbModal } from "ds-alurabooks-vitor";
+import { AbBotao, AbModal, AbCampoTexto  } from "ds-alurabooks-vitor";
 import imagemMonitor from "../../assets/login.png";
 import { useState } from "react";
+import axios from "axios";
 
 interface Props {
-  closedModal: () => void
+  closedModal: () => void;
 }
 
 export function ModalCadastroUsuario({ closedModal }: Props) {
@@ -15,12 +16,37 @@ export function ModalCadastroUsuario({ closedModal }: Props) {
   const [senha, setSenha] = useState("");
   const [senhaConfirmada, setSenhaConfirmada] = useState("");
 
+  const aoSubmeterFormular = (evento: React.FormEvent<HTMLFormElement>) => {
+    evento.preventDefault();
+    const usuario = {
+      nome,
+      email,
+      senha,
+      endereco,
+      cep,
+      complemento,
+    };
+
+    axios
+      .post("http://localhost:8000/public/registrar", usuario)
+      .then(() => {
+        alert("Usuário foi cadastrado com sucesso!");
+        setNome("");
+        setEmail("");
+        setEndereco("");
+        setComplemento("");
+        setCep("");
+        setSenha("");
+        setSenhaConfirmada("");
+        closedModal();
+      })
+      .catch(() => {
+        alert("OPS! Alguma coisa deu errado!");
+      });
+  };
+
   return (
-    <AbModal
-      titulo="Cadastrar"
-      aberta={true}
-      aoFechar={closedModal}
-    >
+    <AbModal titulo="Cadastrar" aberta={true} aoFechar={closedModal}>
       <div className="flex items-center pt-8">
         <figure>
           <img
@@ -29,7 +55,7 @@ export function ModalCadastroUsuario({ closedModal }: Props) {
           />
         </figure>
         <div className="flex flex-col">
-          <form className="w-[500px] max-w-full">
+          <form onSubmit={aoSubmeterFormular} className="w-[500px] max-w-full">
             <AbCampoTexto value={nome} label="Nome" onChange={setNome} />
             <AbCampoTexto value={email} label="E-mail" onChange={setEmail} />
             <AbCampoTexto
@@ -43,16 +69,22 @@ export function ModalCadastroUsuario({ closedModal }: Props) {
               onChange={setComplemento}
             />
             <AbCampoTexto value={cep} label="Cep" onChange={setCep} />
-            <AbCampoTexto value={senha} label="Senha" onChange={setSenha} />
+            <AbCampoTexto
+              value={senha}
+              label="Senha"
+              onChange={setSenha}
+              type="password"
+            />
             <AbCampoTexto
               value={senhaConfirmada}
               label="Confirmação de senha"
               onChange={setSenhaConfirmada}
+              type="password"
             />
+            <footer className="mt-12 text-center">
+              <AbBotao texto="Cadastrar" />
+            </footer>
           </form>
-          <footer className="mt-12 text-center">
-            <AbBotao texto="Cadastrar" />
-          </footer>
         </div>
       </div>
     </AbModal>

@@ -1,6 +1,6 @@
 import logo from "../../assets/logo.svg";
 import { FaRegUserCircle } from "react-icons/fa";
-import { ModalCadastroUsuario } from "../ModalCadastroUsuario";
+import { ModalLoginUsuario } from "../ModalLoginUsuario";
 import { useState } from "react";
 
 export function Header() {
@@ -27,7 +27,7 @@ export function Header() {
         <FaRegUserCircle size={24} />
         <p className="text-sm">Login</p>
       </button>
-      {openModal && <ModalCadastroUsuario closedModal={closedModal} />}
+      {openModal && <ModalLoginUsuario closedModal={closedModal} />}
     </header>
   );
 }
