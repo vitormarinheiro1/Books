@@ -1,10 +1,11 @@
 import logo from "../../assets/logo.svg";
 import { FaRegUserCircle } from "react-icons/fa";
+import { ModalCadastroUsuario } from "../ModalCadastroUsuario";
 
 
 export function Header() {
   return (
-    <nav className="flex justify-between flex-row px-12 h-16">
+    <header className="flex justify-between flex-row px-12 h-16">
       <div className="flex items-center flex-row gap-16">
         <div className="flex flex-row items-center gap-2">
           <img src={logo} alt="logo books" />
@@ -12,10 +13,11 @@ export function Header() {
         </div>
         <p className="text-sm">CATEGORIAS</p>
       </div>
-      <div className="flex items-center gap-2">
+      <button className="flex items-center gap-2">
         <FaRegUserCircle size={24} />
         <p className="text-sm">Login</p>
-      </div>
-    </nav>
+      </button>
+      <ModalCadastroUsuario />
+    </header>
   );
 }
