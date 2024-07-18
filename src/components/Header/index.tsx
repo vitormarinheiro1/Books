@@ -1,9 +1,19 @@
 import logo from "../../assets/logo.svg";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ModalCadastroUsuario } from "../ModalCadastroUsuario";
-
+import { useState } from "react";
 
 export function Header() {
+  const [openModal, setOpenModal] = useState(false)
+
+  const openedModal = () => {
+    setOpenModal(true)
+  }
+
+  const closedModal = () => {
+    setOpenModal(false)
+  }
+
   return (
     <header className="flex justify-between flex-row px-12 h-16">
       <div className="flex items-center flex-row gap-16">
@@ -13,11 +23,11 @@ export function Header() {
         </div>
         <p className="text-sm">CATEGORIAS</p>
       </div>
-      <button className="flex items-center gap-2">
+      <button onClick={openedModal} className="flex items-center gap-2">
         <FaRegUserCircle size={24} />
         <p className="text-sm">Login</p>
       </button>
-      <ModalCadastroUsuario />
+      {openModal && <ModalCadastroUsuario closedModal={closedModal} />}
     </header>
   );
 }

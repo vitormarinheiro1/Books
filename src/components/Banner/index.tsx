@@ -3,15 +3,13 @@ import { IoMdSearch } from "react-icons/io";
 
 export function Banner() {
   return (
-    <div className="relative">
-      <div>
-        <img
-          className="w-full h-80 absolute"
-          src={fundo}
-          alt="Background de fundo"
-        />
-      </div>
-      <div className="relative flex justify-center items-center flex-col h-80">
+    <div
+      style={{
+        backgroundImage: `url(${fundo})`,
+        backgroundSize: "cover"
+      }}
+    >
+      <div className="flex justify-center items-center flex-col h-80">
         <h1 className="text-zinc-50 font-bold text-4xl">
           Já sabe por onde começar?
         </h1>

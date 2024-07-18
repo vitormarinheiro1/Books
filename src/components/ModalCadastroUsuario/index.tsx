@@ -2,7 +2,11 @@ import { AbBotao, AbCampoTexto, AbModal } from "ds-alurabooks-vitor";
 import imagemMonitor from "../../assets/login.png";
 import { useState } from "react";
 
-export function ModalCadastroUsuario() {
+interface Props {
+  closedModal: () => void
+}
+
+export function ModalCadastroUsuario({ closedModal }: Props) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
@@ -15,7 +19,7 @@ export function ModalCadastroUsuario() {
     <AbModal
       titulo="Cadastrar"
       aberta={true}
-      aoFechar={() => console.log("fechando...")}
+      aoFechar={closedModal}
     >
       <div className="flex items-center pt-8">
         <figure>
