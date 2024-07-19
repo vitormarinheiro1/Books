@@ -46,7 +46,6 @@ export function Header() {
         </>
       )}
       {usuarioEstaLogado && (
-        <>
           <Link
             to="/minha-conta/pedidos"
             onClick={() => setModalLoginAberta(false)}
@@ -55,7 +54,6 @@ export function Header() {
             <FaRegUserCircle size={24} />
             <p className="text-sm">Meu perfil</p>
           </Link>
-        </>
       )}
     </header>
   );
