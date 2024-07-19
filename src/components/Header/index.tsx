@@ -23,9 +23,9 @@ export function Header() {
       <div className="flex items-center flex-row gap-16">
         <div className="flex flex-row items-center gap-2">
           <img src={logo} alt="logo books" />
-          <p className="font-medium text-2xl">
+          <Link to="/" className="font-medium text-2xl">
             <span className="font-bold">Vitor</span>Books
-          </p>
+          </Link>
         </div>
         <p className="text-sm">CATEGORIAS</p>
       </div>
