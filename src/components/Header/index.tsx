@@ -2,7 +2,7 @@ import logo from "../../assets/logo.svg";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ModalLoginUsuario } from "../ModalLoginUsuario";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Header() {
   const [modalLoginAberta, setModalLoginAberta] = useState(false);
@@ -13,10 +13,19 @@ export function Header() {
     token != null
   );
 
+  const navigate = useNavigate()
+
   const aoEfetuarLogin = () => {
     setModalLoginAberta(false);
     setUsuarioEstaLogado(true)
+    navigate('/')
   };
+
+  const efetuarLogout = () => {
+    setUsuarioEstaLogado(false)
+    sessionStorage.removeItem('token')
+
+  }
 
   return (
     <header className="flex justify-between flex-row px-12 h-16">
@@ -46,6 +55,7 @@ export function Header() {
         </>
       )}
       {usuarioEstaLogado && (
+        <div className="flex gap-2">
           <Link
             to="/minha-conta/pedidos"
             onClick={() => setModalLoginAberta(false)}
@@ -54,6 +64,10 @@ export function Header() {
             <FaRegUserCircle size={24} />
             <p className="text-sm">Meu perfil</p>
           </Link>
+            <button className="text-sm" onClick={efetuarLogout}>
+              Sair
+            </button>
+        </div>
       )}
     </header>
   );
