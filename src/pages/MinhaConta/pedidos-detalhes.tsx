@@ -1,8 +1,8 @@
-import axios from "axios";
 import { AbBotao } from "ds-alurabooks-vitor";
 import { useEffect, useState } from "react";
 import { IPedido } from "../../interfaces/IPedido";
 import { MdDelete } from "react-icons/md";
+import { http } from "../../http";
 
 export function PedidosDetalhes() {
   const [pedidos, setPedidos] = useState<IPedido[]>([]);
@@ -15,8 +15,8 @@ export function PedidosDetalhes() {
   useEffect(() => {
     const token = sessionStorage.getItem("token");
 
-    axios
-      .get<IPedido[]>("http://localhost:8000/pedidos", {
+    http
+      .get<IPedido[]>("pedidos", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -27,8 +27,8 @@ export function PedidosDetalhes() {
 
   const excluir = (pedido: IPedido) => {
     const token = sessionStorage.getItem("token");
-    axios
-      .delete("http://localhost:8000/pedidos/" + pedido.id, {
+    http
+      .delete("pedidos/" + pedido.id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

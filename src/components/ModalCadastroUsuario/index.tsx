@@ -1,7 +1,7 @@
 import { AbBotao, AbModal, AbCampoTexto  } from "ds-alurabooks-vitor";
 import imagemMonitor from "../../assets/login.png";
 import { useState } from "react";
-import axios from "axios";
+import { http } from "../../http";
 
 interface Props {
   closedModal: () => void;
@@ -27,8 +27,8 @@ export function ModalCadastroUsuario({ closedModal }: Props) {
       complemento,
     };
 
-    axios
-      .post("http://localhost:8000/public/registrar", usuario)
+    http
+      .post("public/registrar", usuario)
       .then(() => {
         alert("Usuário foi cadastrado com sucesso!");
         setNome("");

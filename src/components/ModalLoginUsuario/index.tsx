@@ -1,7 +1,7 @@
 import { AbBotao, AbModal, AbCampoTexto } from "ds-alurabooks-vitor";
 import imagemMonitor from "../../assets/login.png";
 import { useState } from "react";
-import axios from "axios";
+import { http } from "../../http";
 
 interface Props {
   aberta: boolean;
@@ -20,7 +20,7 @@ export function ModalLoginUsuario({ aberta, aoFechar, aoEfetuarLogin }: Props) {
       senha,
     };
 
-    axios.post("http://localhost:8000/public/login", usuario)
+    http.post("public/login", usuario)
       .then(resposta => {
         sessionStorage.setItem('token', resposta.data.access_token)
         setEmail('')
