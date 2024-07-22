@@ -13,26 +13,15 @@ export function PedidosDetalhes() {
   });
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-
     http
-      .get<IPedido[]>("pedidos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get<IPedido[]>("pedidos")
       .then((resposta) => setPedidos(resposta.data))
       .catch((error) => console.log(error));
   }, []);
 
   const excluir = (pedido: IPedido) => {
-    const token = sessionStorage.getItem("token");
     http
-      .delete("pedidos/" + pedido.id, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .delete("pedidos/" + pedido.id)
       .then((resposta) => setPedidos(resposta.data))
       .catch((error) => console.log(error));
   };
